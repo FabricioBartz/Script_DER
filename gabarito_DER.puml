@@ -1,0 +1,31 @@
+@startuml
+hide circle
+skinparam linetype ortho
+
+entity Cliente {
+  * id_cliente : int <<PK>>
+  --
+  nome : varchar
+  telefone : varchar <<multivalorado>>
+  endereco : varchar
+}
+
+note right of Cliente
+  endereco: rua, numero, cidade
+end note
+
+entity Pedido {
+  * id_pedido : int <<PK>>
+  --
+  data_pedido : date
+}
+
+entity "Item do Pedido" as ItemPedido <<weak>> {
+  * numero_item : int <<PK>>
+  --
+  quantidade : int
+}
+
+Cliente ||--o{ Pedido : realiza
+Pedido ||..|{ ItemPedido : contém
+@enduml
